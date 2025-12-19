@@ -11,7 +11,7 @@ from mashumaro.mixins.orjson import DataClassORJSONMixin
 
 
 class UserRole(StrEnum):
-    """User role enum."""
+    """User role enum (legacy - only admin and user)."""
 
     ADMIN = "admin"
     USER = "user"
@@ -64,7 +64,7 @@ class User(DataClassORJSONMixin):
 
     user_id: str
     username: str
-    role: UserRole
+    role: str  # RBAC role_id (e.g., "admin", "user", "guest", "dj", or custom role)
     enabled: bool = True
     created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     display_name: str | None = None
