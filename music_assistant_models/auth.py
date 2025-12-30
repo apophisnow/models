@@ -15,6 +15,7 @@ class UserRole(StrEnum):
 
     ADMIN = "admin"
     USER = "user"
+    GUEST = "guest"
 
 
 class AuthProviderType(StrEnum):
@@ -63,3 +64,18 @@ class AuthToken(DataClassORJSONMixin):
     expires_at: datetime | None = None
     last_used_at: datetime | None = None
     is_long_lived: bool = False
+
+
+@dataclass
+class GuestAccessInfo(DataClassORJSONMixin):
+    """Guest Access information dataclass."""
+
+    enabled: bool
+    guest_url: str | None
+    guest_token: str | None
+    can_play_media: bool
+    can_control_queue: bool
+    can_control_playback: bool
+    can_control_volume: bool
+    player_filter: list[str]
+    provider_filter: list[str]
